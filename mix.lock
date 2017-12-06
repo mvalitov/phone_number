@@ -1,0 +1,2 @@
+%{"fastglobal": {:hex, :fastglobal, "1.0.0", "f3133a0cda8e9408aac7281ec579c4b4a8386ce0e99ca55f746b9f58192f455b", [], [], "hexpm"},
+  "sweet_xml": {:hex, :sweet_xml, "0.6.5", "dd9cde443212b505d1b5f9758feb2000e66a14d3c449f04c572f3048c66e6697", [], [], "hexpm"}}
