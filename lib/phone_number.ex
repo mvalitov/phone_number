@@ -1,6 +1,6 @@
 defmodule PhoneNumber do
   @moduledoc """
-  Library for parsing phone numbers
+  Library for validating international phone numbers. Based on Google's libphonenumber.
   """
 
   @doc """

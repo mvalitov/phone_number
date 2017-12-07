@@ -1,11 +1,10 @@
 # PhoneNumber
 
-**TODO: Add description**
+Library for validating international phone numbers. Based on Google's libphonenumber.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `phone_number` to your list of dependencies in `mix.exs`:
+Add `phone_number` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -15,7 +14,22 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/phone_number](https://hexdocs.pm/phone_number).
+Documentation [HexDocs](https://hexdocs.pm/phone_number)
 
+## Usage
+
+Parse phone:
+
+```elixir
+iex> PhoneNumber.parse("381601234567")
+%PhoneNumber.Phone{country: %PhoneNumber.Country{country_code: "381", data: %{},
+  id: "RS", main_country_for_code: false,
+  validations: [~r/[126-9]\d{4,11}|3(?:[0-79]\d{3,10}|8[2-9]\d{2,9})/]},
+  number: "381601234567", original_number: "381601234567", valid: true}
+```
+
+On startup, the library loads the file `data/telephone_number_data.dat`.
+
+If the file is not found, then the file `data/telephone_number_data.xml` is processed, which contains patterns for parsing the phone. 
+
+If you updated `telephone_number_data.xls`, you must delete the `data/telephone_number_data.dat` file, or run the `mix phone_number.load_phone_data` task
