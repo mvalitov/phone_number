@@ -20,12 +20,11 @@ defmodule PhoneNumber do
     number = String.replace(phone, ~r/\D/, "")
     eligible_countries = Enum.filter(FastGlobal.get(:data), fn(country) ->
       String.starts_with?(number, country.country_code) &&
-      Enum.any?(
-        Enum.filter(
+      !is_nil(
+        Enum.find(
           country.validations,
           &(Regex.match?(&1, number))
-        ),
-        &(&1)
+        )
       )
     end)
     country = cond do
@@ -34,7 +33,7 @@ defmodule PhoneNumber do
       length(eligible_countries) == 0 ->
         nil
       true ->
-        main_country = Enum.filter(eligible_countries, &(&1.main_country_for_code)) |> List.first
+        main_country = Enum.find(eligible_countries, &(&1.main_country_for_code))
         case main_country do
           nil ->
             List.first(eligible_countries)
