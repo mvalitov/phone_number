@@ -4,7 +4,7 @@ defmodule PhoneNumber.Mixfile do
   def project do
     [
       app: :phone_number,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
       homepage_url: "https://hexdocs.pm/phone_number",
@@ -19,7 +19,7 @@ defmodule PhoneNumber.Mixfile do
 
   def package do
     [name: :phone_number,
-     files: ["lib", "mix.exs"],
+     files: ["lib", "data", "mix.exs"],
      maintainers: ["Marsel Valitov"],
      licenses: ["MIT"],
      links: %{"Github" => "https://github.com/mvalitov/phone_number"}]
