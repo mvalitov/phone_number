@@ -17,7 +17,7 @@ defmodule PhoneNumber.Country do
           }
         end)
       {:error, reason} ->
-        raise reason
+        raise to_string(reason)
     end
   end
 
