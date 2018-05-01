@@ -26,9 +26,9 @@ defmodule Mix.Tasks.PhoneNumber.LoadPhoneData do
     |> Path.join("telephone_number_data_file.xml")
   end
 
-  defp base_dir(base \\ @files_path) do
-    base
-    |> Path.expand()
+  defp base_dir() do
+    Application.app_dir(:phone_number)
+    |> Kernel.<>(@files_path)
   end
 
 end
