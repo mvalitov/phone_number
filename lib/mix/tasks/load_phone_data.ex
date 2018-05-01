@@ -17,12 +17,12 @@ defmodule Mix.Tasks.PhoneNumber.LoadPhoneData do
   end
 
   def file_path() do
-    base_dir
+    base_dir()
     |> Path.join("telephone_number_data_file.dat")
   end
 
   def xml_file_path() do
-    base_dir
+    base_dir()
     |> Path.join("telephone_number_data_file.xml")
   end
 
