@@ -22,7 +22,7 @@ defmodule PhoneNumber do
       !is_nil(
         Enum.find(
           country.validations,
-          &(Regex.match?(&1, number))
+          &(Regex.match?(&1, PhoneNumber.Phone.normalized_number(country, number)))
         )
       )
     end)
@@ -41,8 +41,7 @@ defmodule PhoneNumber do
         end
     end
     %PhoneNumber.Phone{
-      original_number: phone,
-      number: number,
+      original_number: number,
       valid: !is_nil(country),
       country: country
     }
