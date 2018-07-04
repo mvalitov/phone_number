@@ -41,7 +41,12 @@ defmodule PhoneNumber.Phone do
     cond do
       country.mobile_token && length(captures) > 0 ->
         :io.format(build_format_string(country), String.replace(number, Enum.at(match_object, 0), Enum.at(match_object, 1)))
-      length(captures) == 0 -> String.replace(number, Enum.at(match_object, 0), "")
+      length(captures) == 0 ->
+        # for elixir 1.5
+        case Enum.at(match_object, 0) do
+          "" -> number
+          pattern -> String.replace(number, pattern, "")
+        end
       true -> :io.format(build_format_string(country), captures)
     end
   end

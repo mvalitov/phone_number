@@ -3,7 +3,7 @@ defmodule PhoneNumberTest do
   doctest PhoneNumber
   @file_path Application.app_dir(:phone_number) |> Kernel.<>("/priv/phone_number/phones_example")
 
-  describe "test parsind and e164_number" do
+  describe "test parsing and e164_number" do
     File.read!(@file_path)
     |> String.split("\n")
     |> Enum.each(fn(row) ->
