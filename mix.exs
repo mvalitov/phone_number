@@ -4,7 +4,7 @@ defmodule PhoneNumber.Mixfile do
   def project do
     [
       app: :phone_number,
-      version: "0.2.1",
+      version: "0.2.2",
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
       homepage_url: "https://hexdocs.pm/phone_number",

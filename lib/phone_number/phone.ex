@@ -18,7 +18,7 @@ defmodule PhoneNumber.Phone do
     end
   end
 
-  defp parse_prefix(country, number) do
+  def parse_prefix(country, number) do
     cond do
       is_nil(country.national_prefix_for_parsing) ->
         number
@@ -40,18 +40,20 @@ defmodule PhoneNumber.Phone do
   defp transform_national_prefix(country, number, match_object, captures) do
     cond do
       country.mobile_token && length(captures) > 0 ->
-        :io.format(build_format_string(country), String.replace(number, Enum.at(match_object, 0), Enum.at(match_object, 1)))
+        format(country.national_prefix_transform_rule, [String.replace(number, Enum.at(match_object, 0), Enum.at(match_object, 1))])
       length(captures) == 0 ->
         # for elixir 1.5
         case Enum.at(match_object, 0) do
           "" -> number
           pattern -> String.replace(number, pattern, "")
         end
-      true -> :io.format(build_format_string(country), captures)
+      true -> format(country.national_prefix_transform_rule, captures)
     end
   end
 
-  defp build_format_string(country) do
-    Regex.replace(country.national_prefix_transform_rule, ~r/(\$\d)/, fn _, x -> "%"<>String.reverse(x)<>"s" end)
+  defp format(string, captures) do
+    Regex.replace(~r/\$(\d+)/, string, fn _, index ->
+      Enum.at(captures, String.to_integer(index) - 1)
+    end)
   end
 end

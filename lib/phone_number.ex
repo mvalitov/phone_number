@@ -46,4 +46,51 @@ defmodule PhoneNumber do
       country: country
     }
   end
+
+  def parse(phone, country) when is_binary(phone) and is_binary(country) do
+    number = String.replace(phone, ~r/\D/, "")
+    case valid?(number, country) do
+      {:ok, %PhoneNumber.Phone{} = p} -> p
+      {:ok, nil} -> %PhoneNumber.Phone{
+	original_number: number,
+	valid: false,
+	country: nil
+      }
+      {:error, reason} -> {:error, reason}
+    end 
+  end
+
+  def possible_countries(phone) when is_binary(phone) do
+     number = String.replace(phone, ~r/\D/, "")
+    Enum.map(FastGlobal.get(:data), fn c -> 
+      case validate(number, c) do
+        {:ok, %PhoneNumber.Phone{} = p} -> p
+        {:ok, nil} -> nil
+      end
+    end)
+    |> Enum.filter(&(!is_nil(&1)))
+  end
+
+  def valid?(phone, country) when is_binary(phone) and is_binary(country) do
+    case Enum.find(FastGlobal.get(:data), &(&1.id == country)) do
+      nil -> {:error, "country with id #{country} not found"}
+      c -> validate(phone, c)
+    end
+  end
+
+  defp validate(phone, %PhoneNumber.Country{} = country) do
+    case Enum.any?(country.validations, &(Regex.match?(&1, PhoneNumber.Phone.normalized_number(country, phone)))) do
+      true -> 
+        {
+          :ok, 
+          %PhoneNumber.Phone{
+            original_number: phone,
+            valid: true,
+            country: country
+          }
+        }
+      false ->
+        {:ok, nil}
+    end
+  end
 end
