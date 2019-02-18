@@ -6,7 +6,7 @@ defmodule PhoneNumberTest do
   describe "test parsing and e164_number" do
     File.read!(@file_path)
     |> String.split("\n")
-    |> Enum.each(fn(row) ->
+    |> Enum.each(fn row ->
       c = String.split(row, ";")
       p = PhoneNumber.parse(Enum.at(c, 2))
       assert p.valid == true

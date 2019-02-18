@@ -8,10 +8,12 @@ defmodule PhoneNumber.Application do
       Mix.Tasks.PhoneNumber.LoadPhoneData.run()
     end
 
-    FastGlobal.put(:data, read_file(Mix.Tasks.PhoneNumber.LoadPhoneData.file_path()) |> :erlang.binary_to_term())
+    FastGlobal.put(
+      :data,
+      read_file(Mix.Tasks.PhoneNumber.LoadPhoneData.file_path()) |> :erlang.binary_to_term()
+    )
 
-    children = [
-    ]
+    children = []
 
     opts = [strategy: :one_for_one, name: PhoneNumber.Supervisor]
     Supervisor.start_link(children, opts)

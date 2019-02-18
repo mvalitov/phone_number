@@ -4,25 +4,27 @@ defmodule PhoneNumber.Mixfile do
   def project do
     [
       app: :phone_number,
-      version: "0.2.2",
+      version: "0.2.3",
       elixir: "~> 1.5",
-      start_permanent: Mix.env == :prod,
+      start_permanent: Mix.env() == :prod,
       homepage_url: "https://hexdocs.pm/phone_number",
       source_url: "https://github.com/mvalitov/phone_number",
-      description: "Library for validating international phone numbers. Based on Google's libphonenumber.",
-      docs: [main: "readme",
-          extras: ["README.md"]],
+      description:
+        "Library for validating international phone numbers. Based on Google's libphonenumber.",
+      docs: [main: "readme", extras: ["README.md"]],
       deps: deps(),
       package: package()
     ]
   end
 
   def package do
-    [name: :phone_number,
-     files: ["lib", "data", "mix.exs"],
-     maintainers: ["Marsel Valitov"],
-     licenses: ["MIT"],
-     links: %{"Github" => "https://github.com/mvalitov/phone_number"}]
+    [
+      name: :phone_number,
+      files: ["lib", "data", "mix.exs"],
+      maintainers: ["Marsel Valitov"],
+      licenses: ["MIT"],
+      links: %{"Github" => "https://github.com/mvalitov/phone_number"}
+    ]
   end
 
   def application do
@@ -36,8 +38,8 @@ defmodule PhoneNumber.Mixfile do
     [
       {:sweet_xml, "~> 0.6.5"},
       {:fastglobal, "~> 1.0"},
-      {:earmark, "~> 0.1", only: :dev},
-      {:ex_doc, "~> 0.11", only: :dev}
+      {:earmark, "~> 1.1", only: :dev},
+      {:ex_doc, "~> 0.19", only: :dev}
     ]
   end
 end
