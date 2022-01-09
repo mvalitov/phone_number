@@ -20,7 +20,7 @@ defmodule PhoneNumber.Mixfile do
   def package do
     [
       name: :phone_number,
-      files: ["lib", "data", "mix.exs"],
+      files: ["lib", "priv", "mix.exs"],
       maintainers: ["Marsel Valitov"],
       licenses: ["MIT"],
       links: %{"Github" => "https://github.com/mvalitov/phone_number"}
