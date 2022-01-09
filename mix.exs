@@ -36,7 +36,7 @@ defmodule PhoneNumber.Mixfile do
 
   defp deps do
     [
-      {:sweet_xml, "~> 0.6.5"},
+      {:sweet_xml, "~> 0.7.2"},
       {:fastglobal, "~> 1.0"},
       {:earmark, "~> 1.1", only: :dev},
       {:ex_doc, "~> 0.19", only: :dev}
